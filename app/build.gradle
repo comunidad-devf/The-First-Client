@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+def LAST_FM_API_KEY = '"' + LastFMApiKey + '"' ?: '"Define yout Last FM api key"';
+
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
@@ -16,11 +18,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug{
+            buildConfigField 'String', 'LAST_FM_API_KEY', LAST_FM_API_KEY
+        }
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.mcxiaoke.volley:library:1.0.17'
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
 }
