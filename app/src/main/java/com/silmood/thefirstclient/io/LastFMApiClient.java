@@ -1,10 +1,6 @@
 package com.silmood.thefirstclient.io;
 
-import com.silmood.thefirstclient.io.model.TopTracksResponse;
-
-import retrofit.Callback;
-import retrofit.http.GET;
-import retrofit.http.Query;
+import retrofit.RestAdapter;
 
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,8 +17,21 @@ import retrofit.http.Query;
  * <p/>
  * Created by Pedro Hernández on 07/2015.
  */
-public interface LastFMApiService {
+public class LastFMApiClient {
 
-    @GET(ApiConstants.URL_TOP_TRACKS)
-    void getTopTracks(@Query(ApiConstants.PARAM_KEY) String apiKey, Callback<TopTracksResponse> serverCallback);
+    private static LastFMApiService API_SERVICE;
+
+    public static LastFMApiService getInstance(){
+
+        if (API_SERVICE == null){
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setEndpoint(ApiConstants.URL_BASE)
+                    .setLogLevel(RestAdapter.LogLevel.BASIC)
+                    .build();
+
+            API_SERVICE = restAdapter.create(LastFMApiService.class);
+        }
+
+        return API_SERVICE;
+    }
 }

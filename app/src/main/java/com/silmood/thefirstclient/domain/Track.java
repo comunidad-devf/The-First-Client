@@ -1,5 +1,7 @@
 package com.silmood.thefirstclient.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +19,18 @@ package com.silmood.thefirstclient.domain;
  */
 public class Track {
 
+    @SerializedName("name")
     String name;
+
+    @SerializedName("duration")
     String duration;
+
     String artistName;
+
+    @SerializedName("playcount")
     int playCount;
+
+    @SerializedName("listeners")
     int listeners;
 
     public String getName() {

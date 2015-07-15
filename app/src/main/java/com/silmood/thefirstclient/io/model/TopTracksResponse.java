@@ -1,10 +1,9 @@
-package com.silmood.thefirstclient.io;
+package com.silmood.thefirstclient.io.model;
 
-import com.silmood.thefirstclient.io.model.TopTracksResponse;
+import com.google.gson.annotations.SerializedName;
+import com.silmood.thefirstclient.domain.Track;
 
-import retrofit.Callback;
-import retrofit.http.GET;
-import retrofit.http.Query;
+import java.util.ArrayList;
 
 /**
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,8 +20,26 @@ import retrofit.http.Query;
  * <p/>
  * Created by Pedro Hernández on 07/2015.
  */
-public interface LastFMApiService {
+public class TopTracksResponse {
 
-    @GET(ApiConstants.URL_TOP_TRACKS)
-    void getTopTracks(@Query(ApiConstants.PARAM_KEY) String apiKey, Callback<TopTracksResponse> serverCallback);
+    @SerializedName("tracks")
+    TracksData tracksData;
+
+    public TracksData getTrackData(){
+        return tracksData;
+    }
+
+    public class TracksData {
+
+        @SerializedName("track")
+        ArrayList<Track> tracks;
+
+        public TracksData() {
+            this.tracks = new ArrayList<>();
+        }
+
+        public ArrayList<Track> getTracks(){
+            return  tracks;
+        }
+    }
 }
