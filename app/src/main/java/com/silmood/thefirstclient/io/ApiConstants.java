@@ -28,9 +28,14 @@ public class ApiConstants {
     public static final String PARAM_FORMAT = "format";
 
     public static final String VALUE_TOP_TRACKS = "chart.gettoptracks";
+    public static final String VALUE_TOP_ARTISTS = "chart.gettopartists";
     public static final String VALUE_JSON = "json";
 
     public static final String URL_TOP_TRACKS = PATH_VERSION + "?" + PARAM_METHOD + "=" + VALUE_TOP_TRACKS
+            + "&" + PARAM_FORMAT + "=" + VALUE_JSON;
+
+    // /2.0?method=chart.gettopartists&format=json
+    public static final String URL_TOP_ARTISTS = PATH_VERSION + "?" + PARAM_METHOD + "=" + VALUE_TOP_ARTISTS
             + "&" + PARAM_FORMAT + "=" + VALUE_JSON;
 
 }
