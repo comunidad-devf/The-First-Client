@@ -1,10 +1,16 @@
 package com.silmood.thefirstclient.io;
 
+import com.silmood.thefirstclient.domain.User;
 import com.silmood.thefirstclient.io.model.TopArtistsResponse;
 import com.silmood.thefirstclient.io.model.TopTracksResponse;
 
 import retrofit.Callback;
+import retrofit.client.Response;
+import retrofit.http.Body;
+import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Query;
 
 /**
@@ -29,4 +35,11 @@ public interface LastFMApiService {
 
     @GET(ApiConstants.URL_TOP_ARTISTS)
     void getTopArtists(@Query(ApiConstants.PARAM_KEY) String apiKey, Callback<TopArtistsResponse> serverCallback);
+
+    @POST("/v2/5185415ba171ea3a00704eed")
+    void login(@Body User user, Callback<Response> responseCallback);
+
+    /*@FormUrlEncoded
+    @POST("/v2/5185415ba171ea3a00704eed")
+    void login(@Field("user")String user, Callback<Response> responseCallback);*/
 }

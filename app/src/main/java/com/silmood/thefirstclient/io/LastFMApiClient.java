@@ -1,5 +1,7 @@
 package com.silmood.thefirstclient.io;
 
+import android.util.Log;
+
 import retrofit.RestAdapter;
 
 /**
@@ -25,9 +27,12 @@ public class LastFMApiClient {
 
         if (API_SERVICE == null){
             RestAdapter restAdapter = new RestAdapter.Builder()
-                    .setEndpoint(ApiConstants.URL_BASE)
-                    .setLogLevel(RestAdapter.LogLevel.BASIC)
-                    .build();
+                    .setEndpoint("http://www.mocky.io")
+                    .setLogLevel(RestAdapter.LogLevel.FULL).setLog(new RestAdapter.Log() {
+                        public void log(String msg) {
+                            Log.i("retrofit", msg);
+                        }
+                    }).build();
 
             API_SERVICE = restAdapter.create(LastFMApiService.class);
         }

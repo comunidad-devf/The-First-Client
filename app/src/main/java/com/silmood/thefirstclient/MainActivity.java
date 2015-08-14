@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.silmood.thefirstclient.domain.Artist;
 import com.silmood.thefirstclient.domain.Track;
+import com.silmood.thefirstclient.domain.User;
 import com.silmood.thefirstclient.io.LastFMApiClient;
 import com.silmood.thefirstclient.io.LastFMApiService;
 import com.silmood.thefirstclient.io.model.TopArtistsResponse;
@@ -17,7 +18,7 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class MainActivity extends AppCompatActivity implements Callback<TopTracksResponse> {
+public class MainActivity extends AppCompatActivity implements Callback<Response> {
 
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements Callback<TopTrack
         //LastFMApiClient.getInstance()
         //        .getTopTracks(BuildConfig.LAST_FM_API_KEY_DEBUG, this);
 
-        LastFMApiClient.getInstance()
+        /*LastFMApiClient.getInstance()
                 .getTopArtists(BuildConfig.LAST_FM_API_KEY_DEBUG, new Callback<TopArtistsResponse>() {
                             @Override
                             public void success(TopArtistsResponse topArtistsResponse, Response response) {
@@ -50,10 +51,26 @@ public class MainActivity extends AppCompatActivity implements Callback<TopTrack
                             public void failure(RetrofitError error) {
                                 error.printStackTrace();
                             }
-                        });
+                       });*/
+
+        LastFMApiClient.getInstance()
+                .login(new User("Bob", "password"),this);
+
+        /*LastFMApiClient.getInstance()
+                .login("Bob",this);*/
     }
 
     @Override
+    public void success(Response response, Response response2) {
+        Log.i(LOG_TAG, response.getStatus() + "");
+    }
+
+    @Override
+    public void failure(RetrofitError error) {
+        error.printStackTrace();
+    }
+
+    /*@Override
     public void success(TopTracksResponse topTracksResponse, Response response) {
         ArrayList<Track> topTracks = topTracksResponse.getTrackData().getTracks();
 
@@ -65,5 +82,5 @@ public class MainActivity extends AppCompatActivity implements Callback<TopTrack
     @Override
     public void failure(RetrofitError error) {
         error.printStackTrace();
-    }
+    }*/
 }
